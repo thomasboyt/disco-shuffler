@@ -39,4 +39,4 @@ app.route('/')
 
 app.use('/static', express.static('build'));
 
-app.listen(3000);
+app.listen(process.ENV.PORT || 3000);
