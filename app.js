@@ -37,6 +37,10 @@ app.route('/')
     });
   });
 
-app.use('/static', express.static('build'));
+if ( process.env.ENV === 'PRODUCTION' ) {
+  app.use('/static', express.static('build'));
+} else {
+  app.use('/static', require('broccoli-middleware'));
+}
 
 app.listen(process.env.PORT || 3000);
