@@ -1,0 +1,23 @@
+{
+  "name": "disco.zone",
+  "version": "0.0.0",
+  "description": "",
+  "main": "Brocfile.js",
+  "dependencies": {
+    "broccoli": "git://github.com/thomasboyt/broccoli#add-watch-command",
+    "broccoli-browserify": "~0.1.0",
+    "broccoli-react": "~0.3.0",
+    "broccoli-static-compiler": "~0.1.4",
+    "envify": "~1.2.1",
+    "express": "~4.2.0",
+    "express-hbs": "~0.7.9",
+    "js-yaml": "~3.0.2",
+    "react": "~0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
