@@ -1,22 +1,4 @@
-var fs = require('fs');
-
-// load playlist
-var yaml = require('js-yaml');
-var playlist = yaml.safeLoad(fs.readFileSync('./playlist.yaml', 'utf8')).songs;
-
-var YOUTUBE_ID = /watch\?v=(.*)$/;  // TODO: this is really naive, obs
-
-function embedUrl(videoUrl) {
-  var url = 'https://www.youtube.com/watch?v=5wRM-t7wvF0';
-  var id = url.match(YOUTUBE_ID)[1];
-  return '//www.youtube.com/embed/' + id +
-         '?autoplay=1&controls=0&playsinline=1&showinfo=0&modestbranding=1';
-}
-
-playlist.forEach(function(song) {
-  song.embedUrl = embedUrl(song.youtube);
-});
-
+var playlist = require('./server/loadPlaylist')('./playlist.yaml');
 
 // set up express
 var express = require('express');
@@ -28,21 +10,33 @@ app.set('view engine', 'hbs');
 app.set('views', './templates');
 
 
-app.use('/static', express.static('build'));
-
 // song index
 app.route('/:id')
   .get(function(req, res, next) {
-  });
+    var id = parseInt(req.params.id, 10);
+    if ( Number.isNaN(id) ) {
+      next();
+    }
 
-// random song
-app.route('/')
-  .get(function(req, res, next) {
-    var song = playlist[0];
+    var song = playlist[id];
 
     res.render('song', {
       song: JSON.stringify(song)
     });
   });
+
+
+// random song
+app.route('/')
+  .get(function(req, res, next) {
+    var index = Math.floor(Math.random() * playlist.length);
+    var song = playlist[index];
+
+    res.render('song', {
+      song: JSON.stringify(song)
+    });
+  });
+
+app.use('/static', express.static('build'));
 
 app.listen(3000);
