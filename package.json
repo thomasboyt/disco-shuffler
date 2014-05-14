@@ -14,12 +14,15 @@
     "js-yaml": "~3.0.2",
     "react": "~0.10.0",
     "broccoli-cli": "0.0.1",
-    "broccoli-middleware": "0.0.1"
+    "broccoli-middleware": "0.0.1",
+    "compression": "^1.0.2",
+    "broccoli-env": "0.0.1",
+    "broccoli-uglify-js": "^0.1.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "BROCCOLI_ENV=PRODUCTION node_modules/.bin/broccoli build build/"
+    "postinstall": "BROCCOLI_ENV=production node_modules/.bin/broccoli build build/"
   },
   "engines": {
     "node": "0.10.x",

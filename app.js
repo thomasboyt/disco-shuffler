@@ -9,6 +9,9 @@ app.engine('hbs', hbs.express3());
 app.set('view engine', 'hbs');
 app.set('views', './templates');
 
+if ( process.env.ENV === 'PRODUCTION' ) {
+  app.use(require('compression')());
+}
 
 // song index
 app.route('/:id')
